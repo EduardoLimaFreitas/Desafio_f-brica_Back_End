@@ -1,6 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 
+# erro ao importar requests, não entendi o motivo.
+import requests
+
 from apps.WorldMap.api import serializers
 from .serializers import WorldMapSerializer
 
@@ -14,11 +17,11 @@ class worldMapViewSet(ModelViewSet):
     queryset = models.WorldMap.objects.all()
 
     def create(self, request):
-        pais = request.data.get('name', '')
+        pais = requests.data.get('name', '')
         
         url = f"https://restcountries.com/v2/name/{pais}"
 
-        requisicao = request.get(url) 
+        requisicao = requests.get(url) 
         json_data = requisicao.json() 
 
 
